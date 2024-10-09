@@ -1,14 +1,26 @@
 package core.models;
 
+
+
 public class Player extends Site{
 
     private int pace, posession, shooting;
+    private String name;
 
-    public Player(int pace, int posession, int shooting) {
+    public Player(String name, int pace, int posession, int shooting) {
         super();
+        this.name = name;
         this.pace = pace;
         this.posession = posession;
         this.shooting = shooting;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPace() {
