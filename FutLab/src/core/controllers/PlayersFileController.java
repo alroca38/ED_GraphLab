@@ -71,6 +71,7 @@ public class PlayersFileController {
                     // Se añade el jugador a la lista de nombres
                     playersNames.add(playerStats[0]);
                 }
+                reader.close();
                 // Si el archivo posee más o menos de 11 líneas, se envía un error
                 if (lineCount > 11) {
                     return new Response("Solo pueden ser ingresados 11 jugadores", Status.BAD_REQUEST);
@@ -85,10 +86,10 @@ public class PlayersFileController {
                     listModel.addElement(playersNames.get(i));
                 }
                 playersJList.setModel(listModel);
+                return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("Este archivo no puede ser procesado por el programa", Status.UNPROCESSABLE_CONTENT);
             }
-            return new Response("Se ha leído el archivo correctamente", Status.OK);
         } catch (Exception unexpectedException) {
             return new Response("Ocurrió un error inesperado", Status.INTERNAL_SERVER_ERROR);
         }
