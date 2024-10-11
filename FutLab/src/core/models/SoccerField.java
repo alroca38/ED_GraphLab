@@ -20,7 +20,7 @@ public class SoccerField {
     private SoccerField() {
         this.sites = new ArrayList<>();
     }
-    
+
     public Map<Player, List<Player>> getGrafo() {
         return grafo;
     }
@@ -58,6 +58,18 @@ public class SoccerField {
 
     public void setAdjacency(int[][] adjacency) {
         this.adjacencyMatrix = adjacency;
+    }
+
+    public void CreatePlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
+        int i = 0;
+        ArrayList<Player> plyrs = new ArrayList<>();
+        for (String n : names) {
+            Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
+            plyrs.add(player);
+            grafo.put(player, new ArrayList<>());
+            System.out.println(plyrs.get(i).getName() + ", " + plyrs.get(i).getPace() + ", " + plyrs.get(i).getPosession() + ", " + plyrs.get(i).getShooting());
+            i++;
+        }
     }
 
     public void createPlayers(File players) throws FileNotFoundException, IOException {
