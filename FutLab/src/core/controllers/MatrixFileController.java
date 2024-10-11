@@ -35,6 +35,7 @@ public class MatrixFileController {
                         }
                     }
                 }
+                reader.close();
                 if (lineCount != 11) {
                     return new Response("El archivo ingresado no tiene la estructura correcta", Status.BAD_REQUEST);
                 }
