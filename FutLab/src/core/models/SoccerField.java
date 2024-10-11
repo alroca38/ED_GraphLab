@@ -60,7 +60,21 @@ public class SoccerField {
         this.adjacencyMatrix = adjacency;
     }
 
-    public void CreatePlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
+    public void createMatrix(File matriz, int[][] mat) throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader(matriz));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            String[] player = line.split(",");
+            for (int i = 0; i < player.length; i++) {
+                for (int j = 1; j < player.length; j++) {
+                    int index = Integer.parseInt(player[j]);
+                    mat[i][j] = index;
+                }
+            }
+        }
+    }
+
+    public void createPlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
         int i = 0;
         ArrayList<Player> plyrs = new ArrayList<>();
         for (String n : names) {
@@ -72,31 +86,6 @@ public class SoccerField {
         }
     }
 
-    /*public void createPlayers(File players) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(players));
-        String line;
-        List<Player> plyrs = new ArrayList<>();
-        while ((line = br.readLine()) != null) {
-            String[] playerStats = line.split(",");
-            Player player = new Player(playerStats[0], Integer.parseInt(playerStats[1]), Integer.parseInt(playerStats[2]), Integer.parseInt(playerStats[3]));
-            plyrs.add(player);
-            grafo.put(player, new ArrayList<>());
-        }
-        br.close();
-        br = new BufferedReader(new FileReader(players));
-
-        int row = 0;
-        while ((line = br.readLine()) != null) {
-            String[] datas = line.split(",");
-            for (int col = 4; col < datas.length; col++) {
-                if (Integer.parseInt(datas[col]) == 1) {
-                    grafo.get(plyrs.get(row)).add(plyrs.get(col - 4));
-                }
-            }
-            row++;
-        }
-        br.close();
-    }*/
     public void expandGraph() {
         // Ejemplo de expansión del grafo: Añadir posiciones intermedias
         List<Player> interNodes = new ArrayList<>();

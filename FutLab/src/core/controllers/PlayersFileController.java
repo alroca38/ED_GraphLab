@@ -29,9 +29,9 @@ public class PlayersFileController {
                 int lineCount = 0;
                 // Listas para contener los atributos de los jugadores
                 ArrayList<String> playersNames = new ArrayList<>();
-                ArrayList<String> playersPace = new ArrayList<>();
-                ArrayList<String> playersPosession = new ArrayList<>();
-                ArrayList<String> playersShooting = new ArrayList<>();
+                ArrayList<Integer> playersPace = new ArrayList<>();
+                ArrayList<Integer> playersPosession = new ArrayList<>();
+                ArrayList<Integer> playersShooting = new ArrayList<>();
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
                     // Se suma una línea al contador
@@ -71,13 +71,13 @@ public class PlayersFileController {
                         } catch (NumberFormatException numericException) {
                             return new Response("Los atributos de los jugadores deben ser numéricos", Status.BAD_REQUEST);
                         }
-                        
+
                     }
                     // Se añaden los atributos del jugador a las listas correspondientes
                     playersNames.add(playerStats[0]);
-                    playersPace.add(playerStats[1]);
-                    playersPosession.add(playerStats[2]);
-                    playersShooting.add(playerStats[3]);
+                    playersPace.add(Integer.valueOf(playerStats[1]));
+                    playersPosession.add(Integer.valueOf(playerStats[2]));
+                    playersShooting.add(Integer.valueOf(playerStats[3]));
                 }
                 reader.close();
                 // Si el archivo posee más o menos de 11 líneas, se envía un error
