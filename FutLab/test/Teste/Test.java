@@ -36,22 +36,17 @@ public class Test {
         shootings.add(37);
         shootings.add(76);
         
-        campo.CreatePlayers(names, paces, posessions, shootings);
         
-        campo.expandGraph();
+        
+        
         
         
         
         
         
         SwingUtilities.invokeLater(() -> {
-            try {
-                File players = new File("players.csv");
-                campo.createPlayers(players);
-                campo.expandGraph();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            campo.CreatePlayers(names, paces, posessions, shootings);
+            campo.expandGraph();
 
             JFrame frame = new JFrame("Campo de Fútbol");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

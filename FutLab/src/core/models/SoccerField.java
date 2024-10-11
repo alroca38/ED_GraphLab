@@ -72,7 +72,7 @@ public class SoccerField {
         }
     }
 
-    public void createPlayers(File players) throws FileNotFoundException, IOException {
+    /*public void createPlayers(File players) throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(players));
         String line;
         List<Player> plyrs = new ArrayList<>();
@@ -96,7 +96,7 @@ public class SoccerField {
             row++;
         }
         br.close();
-    }
+    }*/
 
     public void expandGraph() {
         // Ejemplo de expansión del grafo: Añadir posiciones intermedias
