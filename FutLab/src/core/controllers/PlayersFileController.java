@@ -2,6 +2,7 @@ package core.controllers;
 
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
+import core.models.SoccerField;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,8 +27,11 @@ public class PlayersFileController {
                 String line = null;
                 // Contador de las líneas del archivo
                 int lineCount = 0;
-                // Lista para los nombres de los jugadores ingresados
+                // Listas para contener los atributos de los jugadores
                 ArrayList<String> playersNames = new ArrayList<>();
+                ArrayList<String> playersPace = new ArrayList<>();
+                ArrayList<String> playersPosession = new ArrayList<>();
+                ArrayList<String> playersShooting = new ArrayList<>();
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
                     // Se suma una línea al contador
@@ -67,9 +71,13 @@ public class PlayersFileController {
                         } catch (NumberFormatException numericException) {
                             return new Response("Los atributos de los jugadores deben ser numéricos", Status.BAD_REQUEST);
                         }
+                        
                     }
-                    // Se añade el jugador a la lista de nombres
+                    // Se añaden los atributos del jugador a las listas correspondientes
                     playersNames.add(playerStats[0]);
+                    playersPace.add(playerStats[1]);
+                    playersPosession.add(playerStats[2]);
+                    playersShooting.add(playerStats[3]);
                 }
                 reader.close();
                 // Si el archivo posee más o menos de 11 líneas, se envía un error
@@ -86,6 +94,7 @@ public class PlayersFileController {
                     listModel.addElement(playersNames.get(i));
                 }
                 playersJList.setModel(listModel);
+                SoccerField.getInstance().createPlayers(playersNames, playersPace, playersPosession, playersShooting);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("Este archivo no puede ser procesado por el programa", Status.UNPROCESSABLE_CONTENT);
