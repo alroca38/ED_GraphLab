@@ -29,9 +29,9 @@ public class PlayersFileController {
                 int lineCount = 0;
                 // Listas para contener los atributos de los jugadores
                 ArrayList<String> playersNames = new ArrayList<>();
-                ArrayList<String> playersPace = new ArrayList<>();
-                ArrayList<String> playersPosession = new ArrayList<>();
-                ArrayList<String> playersShooting = new ArrayList<>();
+                ArrayList<Integer> playersPace = new ArrayList<>();
+                ArrayList<Integer> playersPosession = new ArrayList<>();
+                ArrayList<Integer> playersShooting = new ArrayList<>();
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
                     // Se suma una línea al contador
@@ -71,16 +71,16 @@ public class PlayersFileController {
                         } catch (NumberFormatException numericException) {
                             return new Response("Los atributos de los jugadores deben ser numéricos", Status.BAD_REQUEST);
                         }
-                        
+
                     }
                     // Se añaden los atributos del jugador a las listas correspondientes
                     playersNames.add(playerStats[0]);
-                    playersPace.add(playerStats[1]);
-                    playersPosession.add(playerStats[2]);
-                    playersShooting.add(playerStats[3]);
+                    playersPace.add(Integer.valueOf(playerStats[1]));
+                    playersPosession.add(Integer.valueOf(playerStats[2]));
+                    playersShooting.add(Integer.valueOf(playerStats[3]));
                 }
                 reader.close();
-                // Si el archivo posee más o menos de 11 líneas, se envía un error
+                // El archivo solo puede contener 11 líneas
                 if (lineCount > 11) {
                     return new Response("Solo pueden ser ingresados 11 jugadores", Status.BAD_REQUEST);
                 }
@@ -94,7 +94,7 @@ public class PlayersFileController {
                     listModel.addElement(playersNames.get(i));
                 }
                 playersJList.setModel(listModel);
-                SoccerField.getInstance().createPlayers(playersNames, playersPace, playersPosession, playersShooting);
+                SoccerField.getInstance().CreatePlayers(playersNames, playersPace, playersPosession, playersShooting);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("Este archivo no puede ser procesado por el programa", Status.UNPROCESSABLE_CONTENT);
