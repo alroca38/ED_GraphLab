@@ -39,7 +39,6 @@ public class CampoPanel extends JPanel {
             int col = index % gridSize;
             int x = col * (nodeSize + padding) + padding;
             int y = row * (nodeSize + padding) + padding;
-
             g.setColor(Color.BLACK);
             g.fillOval(x, y, nodeSize, nodeSize);
             g.drawString(player.getName(), x, y + nodeSize + 10);
