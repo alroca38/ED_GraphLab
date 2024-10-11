@@ -97,13 +97,12 @@ public class SoccerField {
         }
         br.close();
     }*/
-
     public void expandGraph() {
         // Ejemplo de expansión del grafo: Añadir posiciones intermedias
         List<Player> interNodes = new ArrayList<>();
 
         // Crear nodos intermedios
-        for (int i = 1; i <= 11; i++) {
+        for (int i = 1; i <= 22; i++) {
             Player position = new Player("Posicion" + i, 0, 0, 0);  // Nodos de posición sin atributos
             interNodes.add(position);
             grafo.put(position, new ArrayList<>());
@@ -119,12 +118,13 @@ public class SoccerField {
             }
         }
 
-        // Conectar posiciones intermedias entre sí
-        for (int i = 0; i < interNodes.size() - 1; i++) {
-            for (int j = i + 1; j < interNodes.size(); j++) {
-                grafo.get(interNodes.get(i)).add(interNodes.get(j));
-                grafo.get(interNodes.get(j)).add(interNodes.get(i));
-            }
+        // Conectar posiciones intermedias solo con sus vecinos inmediatos
+        for (int i = 0; i < interNodes.size() - 1; i = i + 2) {
+            Player current = interNodes.get(i);
+            Player next = interNodes.get(i + 1);
+
+            grafo.get(current).add(next);
+            grafo.get(next).add(current);
         }
     }
 

@@ -1,6 +1,5 @@
 package core.models;
 
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -27,24 +26,33 @@ public class CampoPanel extends JPanel {
         super.paintComponent(g);
 
         Map<Player, List<Player>> grafo = campo.getGrafo();
-        int i = 1;
+        int size = grafo.size();
+        int gridSize = (int) Math.ceil(Math.sqrt(size));
+        int nodeSize = 20;
+        int padding = 100;
 
-        for (Map.Entry<Player, List<Player>> entry : grafo.entrySet()) {
-            Player player = entry.getKey();
-            int x = i * 100;
-            int y = 100;
+        List<Player> nodes = new ArrayList<>(grafo.keySet());
+
+        for (int index = 0; index < nodes.size(); index++) {
+            Player player = nodes.get(index);
+            int row = index / gridSize;
+            int col = index % gridSize;
+            int x = col * (nodeSize + padding) + padding;
+            int y = row * (nodeSize + padding) + padding;
+
             g.setColor(Color.BLACK);
-            g.fillOval(x, y, 20, 20);
-            g.drawString(player.getName(), x, y + 30);
+            g.fillOval(x, y, nodeSize, nodeSize);
+            g.drawString(player.getName(), x, y + nodeSize + 10);
 
-            List<Player> conexiones = entry.getValue();
+            List<Player> conexiones = grafo.get(player);
             for (Player conexion : conexiones) {
-                int j = new ArrayList<>(grafo.keySet()).indexOf(conexion) + 1;
-                int x2 = j * 100;
-                int y2 = 100;
-                g.drawLine(x + 10, y + 10, x2 + 10, y2 + 10);
+                int conexionIndex = nodes.indexOf(conexion);
+                int row2 = conexionIndex / gridSize;
+                int col2 = conexionIndex % gridSize;
+                int x2 = col2 * (nodeSize + padding) + padding;
+                int y2 = row2 * (nodeSize + padding) + padding;
+                g.drawLine(x + nodeSize / 2, y + nodeSize / 2, x2 + nodeSize / 2, y2 + nodeSize / 2);
             }
-            i++;
         }
     }
 }

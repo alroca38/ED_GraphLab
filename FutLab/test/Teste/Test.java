@@ -2,8 +2,6 @@
 package Teste;
 import core.models.CampoPanel;
 import core.models.SoccerField;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
