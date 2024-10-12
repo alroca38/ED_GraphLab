@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -29,6 +30,8 @@ public class CampoPanel extends JPanel {
         int centerX = getWidth() / 2;
         int centerY = getHeight() / 2;
         List<Point> points = new ArrayList<>();
+        JFrame frame =  new JFrame();
+        
 
         for (int i = 0; i < numNodes; i++) {
             double angle = 2 * Math.PI * i / numNodes;
@@ -37,7 +40,9 @@ public class CampoPanel extends JPanel {
             points.add(new Point(x, y));
             g.setColor(Color.BLACK);
             g.fillOval(x - 10, y - 10, 20, 20);
-            g.drawString("Node " + i, x - 15, y - 15);
+            if (SoccerField.getInstance().getSites().get(i) instanceof Player p) {
+            g.drawString(p.getName(), x - 15, y - 15);
+            }
         }
 
         for (int i = 0; i < numNodes; i++) {

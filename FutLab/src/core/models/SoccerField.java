@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JFrame;
 
 public class SoccerField {
 
@@ -61,27 +62,38 @@ public class SoccerField {
     }
 
     public void createMatrix(File matriz, int[][] mat) throws FileNotFoundException, IOException {
+        JFrame frame = new JFrame();
         BufferedReader br = new BufferedReader(new FileReader(matriz));
         String line = null;
         while ((line = br.readLine()) != null) {
-            String[] player = line.split(",");
-            for (int i = 0; i < player.length; i++) {
+            String[] player = line.split(";");
+            for (int i = 0; i < player.length - 1; i++) {
                 for (int j = 1; j < player.length; j++) {
                     int index = Integer.parseInt(player[j]);
                     mat[i][j] = index;
                 }
             }
         }
+        br.close();
+        setAdjacency(mat);
+        CampoPanel cam = new CampoPanel(mat);
+        frame.add(cam);
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
     public void createPlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
         int i = 0;
-        ArrayList<Player> plyrs = new ArrayList<>();
+        sites = new ArrayList<>();
         for (String n : names) {
             Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
-            plyrs.add(player);
+            sites.add(player);
             grafo.put(player, new ArrayList<>());
-            System.out.println(plyrs.get(i).getName() + ", " + plyrs.get(i).getPace() + ", " + plyrs.get(i).getPosession() + ", " + plyrs.get(i).getShooting());
+            if (sites.get(i) instanceof Player p) {
+                
+                System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
+            }
             i++;
         }
     }

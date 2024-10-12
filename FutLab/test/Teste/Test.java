@@ -21,30 +21,36 @@ public class Test {
         names.add("Alejandro");
         names.add("Torres");
         names.add("Rodriguez");
+        names.add("Rodriguezzzz");
 
         paces.add(10);
         paces.add(30);
         paces.add(40);
         paces.add(67);
+        paces.add(62);
 
         posessions.add(35);
         posessions.add(53);
         posessions.add(56);
         posessions.add(23);
+        posessions.add(25);
 
         shootings.add(34);
         shootings.add(45);
         shootings.add(37);
         shootings.add(76);
+        shootings.add(769);
+        
+        int [][] matriz1=new int[5][6];
 
         JFrame frame = new JFrame("Grafo Dibujado");
         File matriz = new File("C:\\Users\\DELL\\Documents\\GitHub\\ED_GraphLab\\FutLab\\src\\main\\players.csv");
-        int[][] mat=new int[5][6];
-        campo.createMatrix(matriz, mat);
-        CampoPanel panel = new CampoPanel(mat);
-        frame.add(panel);
-        frame.setSize(500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        campo.createPlayers(names, paces, posessions, shootings);
+        campo.createMatrix(matriz, matriz1);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6; j++) {
+                System.out.println(campo.getAdjacency()[i][j]);
+            }
+        }
     }
 }
