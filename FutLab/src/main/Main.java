@@ -23,7 +23,7 @@ public class Main {
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuFrame().setVisible(true);
+                MenuFrame.getInstance().setVisible(true);
             }
         });
     }
