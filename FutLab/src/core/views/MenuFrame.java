@@ -4,13 +4,22 @@ import javax.swing.JFrame;
 
 public class MenuFrame extends javax.swing.JFrame {
 
-    public MenuFrame() {
+    private static MenuFrame instance;
+    
+    private MenuFrame() {
         BackgroundPanel background = new BackgroundPanel("/resources/images/Menu.png");
         setContentPane(background);
         setResizable(false);
         setLocationRelativeTo(null);
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+    
+    public static JFrame getInstance(){
+        if(instance == null){
+            instance = new MenuFrame();
+        }
+        return instance;
     }
 
     @SuppressWarnings("unchecked")
@@ -62,7 +71,7 @@ public class MenuFrame extends javax.swing.JFrame {
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
         this.setVisible(false);
-        new PlayersSelectionFrame(this).setVisible(true);
+        new PlayersSelectionFrame().setVisible(true);
     }//GEN-LAST:event_StartButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed

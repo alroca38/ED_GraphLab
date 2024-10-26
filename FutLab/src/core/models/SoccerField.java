@@ -67,7 +67,7 @@ public class SoccerField {
             Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
             plyrs.add(player);
             grafo.put(player, new ArrayList<>());
-            System.out.println(plyrs.get(i).getName() + ", " + plyrs.get(i).getPace() + ", " + plyrs.get(i).getPosession() + ", " + plyrs.get(i).getShooting());
+            //System.out.println(plyrs.get(i).getName() + ", " + plyrs.get(i).getPace() + ", " + plyrs.get(i).getPosession() + ", " + plyrs.get(i).getShooting());
             i++;
         }
     }
