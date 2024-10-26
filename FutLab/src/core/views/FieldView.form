@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="77" max="32767" attributes="0"/>
-              <Component id="posseesionButton" min="-2" pref="130" max="-2" attributes="0"/>
+              <Component id="possesionButton" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="directButton" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -42,7 +42,7 @@
               <EmptySpace pref="443" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="directButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="posseesionButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="possesionButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="longShootingButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -52,12 +52,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="posseesionButton">
+    <Component class="javax.swing.JButton" name="possesionButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Posesion"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posseesionButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="possesionButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="longShootingButton">

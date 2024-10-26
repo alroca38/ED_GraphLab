@@ -23,17 +23,17 @@ public class FieldView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        posseesionButton = new javax.swing.JButton();
+        possesionButton = new javax.swing.JButton();
         longShootingButton = new javax.swing.JButton();
         directButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        posseesionButton.setText("Posesion");
-        posseesionButton.addActionListener(new java.awt.event.ActionListener() {
+        possesionButton.setText("Posesion");
+        possesionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                posseesionButtonActionPerformed(evt);
+                possesionButtonActionPerformed(evt);
             }
         });
 
@@ -64,7 +64,7 @@ public class FieldView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(77, Short.MAX_VALUE)
-                .addComponent(posseesionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(possesionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(directButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
@@ -79,7 +79,7 @@ public class FieldView extends javax.swing.JFrame {
                 .addContainerGap(443, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(directButton)
-                    .addComponent(posseesionButton)
+                    .addComponent(possesionButton)
                     .addComponent(longShootingButton)
                     .addComponent(exitButton))
                 .addGap(24, 24, 24))
@@ -88,9 +88,9 @@ public class FieldView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void posseesionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_posseesionButtonActionPerformed
+    private void possesionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_possesionButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_posseesionButtonActionPerformed
+    }//GEN-LAST:event_possesionButtonActionPerformed
 
     private void longShootingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_longShootingButtonActionPerformed
         // TODO add your handling code here:
@@ -108,6 +108,6 @@ public class FieldView extends javax.swing.JFrame {
     private javax.swing.JButton directButton;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton longShootingButton;
-    private javax.swing.JButton posseesionButton;
+    private javax.swing.JButton possesionButton;
     // End of variables declaration//GEN-END:variables
 }
