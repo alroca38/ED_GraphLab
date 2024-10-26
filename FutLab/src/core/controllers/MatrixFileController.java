@@ -2,6 +2,7 @@ package core.controllers;
 
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
+import core.models.SoccerField;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -30,17 +31,11 @@ public class MatrixFileController {
                     // Arreglo contenedor de cada uno de los campos de la línea actual
                     String[] playerAdjacency = line.split(",");
                     // Validación de la cantidad de campos (Deben ser 12 por línea)
-                    if (playerAdjacency.length != 12) {
+                    if (playerAdjacency.length != 11) {
                         return new Response("El archivo ingresado no tiene la cantidad de campos requerida", Status.BAD_REQUEST);
                     }
-                    // Arreglo contenedor de los caracteres que componen el nombre del jugador
-                    char[] nameChar = playerAdjacency[0].toCharArray();
-                    // Validación del nombre del jugador
-                    if (playerAdjacency[0].isEmpty() || nameChar[0] == ' ' || nameChar[nameChar.length - 1] == ' ') {
-                        return new Response("El nombre del jugador debe tener al menos 1 caracter. Además, no puede inciar o terminar con un espacio", Status.BAD_REQUEST);
-                    }
                     // Recorrido de los campos numéricos del jugador actual
-                    for (int i = 1; i < playerAdjacency.length; i++) {
+                    for (int i = 0; i < playerAdjacency.length; i++) {
                         // Los campos únicamente pueden tomar el valor de 0 y 1
                         if (!"0".equals(playerAdjacency[i]) && !"1".equals(playerAdjacency[i])) {
                             return new Response("Los valores ingresados en los campos del archivo no son adecuados", Status.BAD_REQUEST);
@@ -55,6 +50,8 @@ public class MatrixFileController {
                 if (lineCount < 11) {
                     return new Response("Deben ser ingresados al menos 11 jugadores", Status.BAD_REQUEST);
                 }
+                int[][] auxMatrix = new int[11][11];
+                //SoccerField.getInstance().createMatrix(matrixFile, auxMatrix);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("El archivo no pudo ser accedido/encontrado por el programa", Status.BAD_REQUEST);

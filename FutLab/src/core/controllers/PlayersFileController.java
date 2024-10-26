@@ -34,7 +34,7 @@ public class PlayersFileController {
                 ArrayList<Integer> playersPosession = new ArrayList<>();
                 ArrayList<Integer> playersShooting = new ArrayList<>();
                 // Posiciones de los jugadores
-                String[] positions = {"POR", "LI", "DFCI", "DFCD", "LD", "MCD", "MC", "MI", "MCO", "MD", "DC"};
+                String[] positions = {"POR", "LI", "DFCI", "DFCD", "LD", "MCD", "MC", "MC", "EI", "ED", "DC"};
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
                     // Se suma una línea al contador
