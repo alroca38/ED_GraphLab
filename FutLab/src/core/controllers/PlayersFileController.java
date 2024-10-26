@@ -3,18 +3,19 @@ package core.controllers;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import core.models.SoccerField;
+import core.views.TableProtector;
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PlayersFileController {
 
     // Método para validar que la estructura del archivo sea correcta y procesable por el programa
-    public static Response readPlayersFile(File playersFile, JList playersJList) {
+    public static Response readPlayersFile(File playersFile, JTable playersTable, DefaultTableModel model) {
         // Verificación de la extensión del archivo
         if (!playersFile.getAbsolutePath().endsWith(".csv")) {
             return new Response("El archivo ingresado debe ser un archivo en formato CSV", Status.BAD_REQUEST);
@@ -32,6 +33,8 @@ public class PlayersFileController {
                 ArrayList<Integer> playersPace = new ArrayList<>();
                 ArrayList<Integer> playersPosession = new ArrayList<>();
                 ArrayList<Integer> playersShooting = new ArrayList<>();
+                // Posiciones de los jugadores
+                String[] positions = {"POR", "LI", "DFCI", "DFCD", "LD", "MCD", "MC", "MI", "MCO", "MD", "DC"};
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
                     // Se suma una línea al contador
@@ -71,7 +74,6 @@ public class PlayersFileController {
                         } catch (NumberFormatException numericException) {
                             return new Response("Los atributos de los jugadores deben ser numéricos", Status.BAD_REQUEST);
                         }
-
                     }
                     // Se añaden los atributos del jugador a las listas correspondientes
                     playersNames.add(playerStats[0]);
@@ -87,13 +89,11 @@ public class PlayersFileController {
                 if (lineCount < 11) {
                     return new Response("Deben ser ingresados al menos 11 jugadores", Status.BAD_REQUEST);
                 }
-                //Creación de una lista con los jugadores para imprimirlos en las vistas del programa
-                playersJList.removeAll();
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-                for (int i = 0; i < playersNames.size(); i++) {
-                    listModel.addElement(playersNames.get(i));
+                for (int i = 0; i < lineCount; i++) {
+                    Object[] player = {positions[i], playersNames.get(i), playersPace.get(i), playersPosession.get(i), playersShooting.get(i)};
+                    model.addRow(player);
                 }
-                playersJList.setModel(listModel);
+                TableProtector protector = new TableProtector(playersTable, model);
                 SoccerField.getInstance().CreatePlayers(playersNames, playersPace, playersPosession, playersShooting);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {

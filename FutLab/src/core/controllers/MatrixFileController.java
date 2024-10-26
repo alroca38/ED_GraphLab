@@ -10,6 +10,10 @@ import java.io.IOException;
 public class MatrixFileController {
 
     public static Response readMatrixFile(File matrixFile) {
+        // Verificación de la extensión del archivo
+        if (!matrixFile.getAbsolutePath().endsWith(".csv")) {
+            return new Response("El archivo ingresado debe ser un archivo en formato CSV", Status.BAD_REQUEST);
+        }
         // Manejo de excepciones
         try {
             // Valida que el archivo puede ser procesado por el programa
@@ -27,7 +31,7 @@ public class MatrixFileController {
                     String[] playerAdjacency = line.split(",");
                     // Validación de la cantidad de campos (Deben ser 12 por línea)
                     if (playerAdjacency.length != 12) {
-                        return new Response("El archivo ingresado no tiene la estructura correcta", Status.BAD_REQUEST);
+                        return new Response("El archivo ingresado no tiene la cantidad de campos requerida", Status.BAD_REQUEST);
                     }
                     // Arreglo contenedor de los caracteres que componen el nombre del jugador
                     char[] nameChar = playerAdjacency[0].toCharArray();
@@ -39,7 +43,7 @@ public class MatrixFileController {
                     for (int i = 1; i < playerAdjacency.length; i++) {
                         // Los campos únicamente pueden tomar el valor de 0 y 1
                         if (!"0".equals(playerAdjacency[i]) && !"1".equals(playerAdjacency[i])) {
-                            return new Response("El archivo ingresado no tiene la estructura correcta o no crresponde a la adyacencia de los jugadores", Status.BAD_REQUEST);
+                            return new Response("Los valores ingresados en los campos del archivo no son adecuados", Status.BAD_REQUEST);
                         }
                     }
                 }
