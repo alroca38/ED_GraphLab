@@ -189,7 +189,9 @@ public class PlayersSelectionFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_adjacencySelectionButtonActionPerformed
 
     private void confirmationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmationButtonActionPerformed
-
+        dispose();
+        MenuFrame.getInstance().setVisible(false);
+        new FieldView().setVisible(true);
     }//GEN-LAST:event_confirmationButtonActionPerformed
 
     @Override
