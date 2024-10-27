@@ -65,6 +65,14 @@ public class SoccerField {
         this.adjacencyMatrix = adjacency;
     }
 
+    public Tactic getTactic() {
+        return tactic;
+    }
+
+    public void setTactic(Tactic tactic) {
+        this.tactic = tactic;
+    }
+    
     public void createMatrix(File matriz, int[][] mat) throws FileNotFoundException, IOException {
         JFrame frame = new JFrame();
         BufferedReader br = new BufferedReader(new FileReader(matriz));
@@ -80,6 +88,7 @@ public class SoccerField {
         }
         br.close();
         setAdjacency(mat);
+        Adjacents();
     }
 
     public void Adjacents() {
@@ -136,16 +145,5 @@ public class SoccerField {
         }
     }
 
-    public Player nextPlayer(Player currentPlayer) {
-        Player nextPlayer = null;
-        int currentDistance = FloydWarshall.relativeInfinity();
-        ArrayList<Site> adjacents = currentPlayer.getAdjacent();
-        for (Site adjacent : adjacents) {
-            if(FloydWarshall.floydWarshall(adjacencyMatrix, adjacent, this.tactic.getInterestingPlayer()) <= currentDistance){
-                nextPlayer = (Player) adjacent;
-                currentDistance = FloydWarshall.floydWarshall(adjacencyMatrix, nextPlayer, this.tactic.getInterestingPlayer());
-            }
-        }
-        return nextPlayer;
-    }
+    
 }

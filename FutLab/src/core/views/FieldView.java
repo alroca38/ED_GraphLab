@@ -1,6 +1,9 @@
 package core.views;
 
 import core.models.CampoPanel;
+import core.models.DirectTactic;
+import core.models.PosessionTactic;
+import core.models.ShootingTactic;
 import core.models.SoccerField;
 import javax.swing.JFrame;
 
@@ -12,6 +15,9 @@ public class FieldView extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         initComponents();
+        possesionButton.setEnabled(false);
+        longShootingButton.setEnabled(true);
+        directButton.setEnabled(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
@@ -91,15 +97,24 @@ public class FieldView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void possesionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_possesionButtonActionPerformed
-        // TODO add your handling code here:
+        possesionButton.setEnabled(false);
+        longShootingButton.setEnabled(true);
+        directButton.setEnabled(true);
+        SoccerField.getInstance().setTactic(new PosessionTactic());
     }//GEN-LAST:event_possesionButtonActionPerformed
 
     private void longShootingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_longShootingButtonActionPerformed
-        // TODO add your handling code here:
+        possesionButton.setEnabled(true);
+        longShootingButton.setEnabled(false);
+        directButton.setEnabled(true);
+        SoccerField.getInstance().setTactic(new ShootingTactic());
     }//GEN-LAST:event_longShootingButtonActionPerformed
 
     private void directButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_directButtonActionPerformed
-        // TODO add your handling code here:
+        possesionButton.setEnabled(true);
+        longShootingButton.setEnabled(true);
+        directButton.setEnabled(false);
+        SoccerField.getInstance().setTactic(new DirectTactic());
     }//GEN-LAST:event_directButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

@@ -19,14 +19,18 @@ public class CampoPanel extends JPanel {
     private int[][] adjMatrix;
     private List<Integer> targetX;  // Lista de puntos finales en X para cada vértice
     private Timer timer;
+    private Timer timer1;
     private List<Point> points;
     Image image;
+    private Player pl;
 
     public CampoPanel(int[][] adjMatrix, String path) {
         this.adjMatrix = adjMatrix;
         this.points = new ArrayList<>();
         targetX = new ArrayList<>();
         image = new ImageIcon(getClass().getResource(path)).getImage();
+        this.pl = (Player) SoccerField.getInstance().getSites().getFirst();
+        SoccerField.getInstance().setTactic(new PosessionTactic());
 
         // Definición de las posiciones para una formación 4-3-3
         points.add(new Point(0, 250)); // Portero
@@ -40,6 +44,7 @@ public class CampoPanel extends JPanel {
         points.add(new Point(150, 400)); // Delantero 3
         points.add(new Point(150, 100)); // Delantero 1
         points.add(new Point(150, 250)); // Delantero 2
+        points.add(new Point(0, 250)); // Balon
 
         for (Point point : points) {
             targetX.add(point.x + 700);  // Ejemplo: moverse 100 unidades hacia la derecha
@@ -50,6 +55,7 @@ public class CampoPanel extends JPanel {
 
         timer.start();
     }
+    int c = 0;
 
     private void movePoints() {
         boolean allReachedTarget = true;
@@ -66,7 +72,44 @@ public class CampoPanel extends JPanel {
             Point de1 = points.get(8);
             Point de2 = points.get(9);
             Point de3 = points.get(10);
+            int currentPlayerIndex = pl.getId();
+            Point currentBallPosition = points.get(11);
             int tx = targetX.get(i);
+            Point b;
+            Point targetPosition;
+            if (c > 100) {
+                int nextPlayerIndex;
+                if (pl != SoccerField.getInstance().getTactic().getInterestingPlayer()) {
+                    nextPlayerIndex = nextPlayer(pl); // Actualiza el siguiente jugador con `nextPlayer`
+                }else{
+                    nextPlayerIndex = pl.getId(); // Actualiza el siguiente jugador con `nextPlayer
+                }
+                targetPosition = points.get(nextPlayerIndex); // Posición del siguiente jugador
+                c = 0;
+            } else {
+                targetPosition = points.get(currentPlayerIndex);
+
+            }
+
+            if (currentBallPosition.x < targetPosition.x) {
+                currentBallPosition.x += 1; // Ajusta la velocidad aumentando el incremento
+                allReachedTarget = false;
+            } else if (currentBallPosition.x > targetPosition.x) {
+                currentBallPosition.x -= 1;
+                allReachedTarget = false;
+            }
+
+            if (currentBallPosition.y < targetPosition.y) {
+                currentBallPosition.y += 1;
+                allReachedTarget = false;
+            } else if (currentBallPosition.y > targetPosition.y) {
+                currentBallPosition.y -= 1;
+                allReachedTarget = false;
+            }
+
+            if (currentBallPosition.equals(targetPosition)) {
+                this.pl = (Player) SoccerField.getInstance().getSites().get(currentPlayerIndex); // Actualiza el jugador actual con el balón
+            }
 
             // Mover el punto hacia el objetivo en el eje X
             if (p.x < tx) {
@@ -76,6 +119,7 @@ public class CampoPanel extends JPanel {
                 p.x -= 1;
                 allReachedTarget = false;
             }
+
             if (a.x > 100) {
                 a.x = 100;
             }
@@ -117,6 +161,21 @@ public class CampoPanel extends JPanel {
         if (allReachedTarget) {
             timer.stop();
         }
+        c++;
+    }
+
+    public int nextPlayer(Player currentPlayer) {
+        Player nextPlayer = null;
+        int currentDistance = FloydWarshall.relativeInfinity();
+        ArrayList<Site> adjacents = currentPlayer.getAdjacent();
+        for (Site adjacent : adjacents) {
+            if (FloydWarshall.floydWarshall(SoccerField.getInstance().getAdjacency(), adjacent, SoccerField.getInstance().getTactic().getInterestingPlayer()) <= currentDistance) {
+                nextPlayer = (Player) adjacent;
+                currentDistance = FloydWarshall.floydWarshall(SoccerField.getInstance().getAdjacency(), nextPlayer, SoccerField.getInstance().getTactic().getInterestingPlayer());
+            }
+        }
+        this.pl = nextPlayer;
+        return nextPlayer.getId();
     }
 
     // Método para obtener los puntos según la formación seleccionada
@@ -128,15 +187,20 @@ public class CampoPanel extends JPanel {
         for (int i = 0; i < points.size(); i++) {
             if (i == 0) {
                 g.setColor(Color.BLUE);
+
+            } else if (i == 11) {
+                g.setColor(Color.WHITE);
             } else {
                 g.setColor(Color.RED);
             }
             Point p = points.get(i);
             g.fillOval(p.x - 7, p.y - 7, 15, 15);
 
-            if (SoccerField.getInstance().getSites().get(i) instanceof Player player) {
-                g.setColor(Color.WHITE);
-                g.drawString(player.getName(), p.x - 15, p.y - 15);
+            if (i < 11) {
+                if (SoccerField.getInstance().getSites().get(i) instanceof Player player) {
+                    g.setColor(Color.WHITE);
+                    g.drawString(player.getName(), p.x - 15, p.y - 15);
+                }
             }
         }
 
