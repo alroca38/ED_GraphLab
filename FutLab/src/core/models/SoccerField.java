@@ -14,10 +14,8 @@ import java.util.Map;
 import java.util.Queue;
 import javax.swing.JFrame;
 
-
 public class SoccerField {
 
-    private static final int INF = Integer.MAX_VALUE;
     private static SoccerField instance;
     private ArrayList<Site> sites;
     private int[][] adjacencyMatrix;
@@ -140,12 +138,12 @@ public class SoccerField {
 
     public Player nextPlayer(Player currentPlayer) {
         Player nextPlayer = null;
+        int currentDistance = FloydWarshall.relativeInfinity();
         ArrayList<Site> adjacents = currentPlayer.getAdjacent();
         for (Site adjacent : adjacents) {
-            if (nextPlayer == null) {
+            if(FloydWarshall.floydWarshall(adjacencyMatrix, adjacent, this.tactic.getInterestingPlayer()) <= currentDistance){
                 nextPlayer = (Player) adjacent;
-            } else {
-                
+                currentDistance = FloydWarshall.floydWarshall(adjacencyMatrix, nextPlayer, this.tactic.getInterestingPlayer());
             }
         }
         return nextPlayer;

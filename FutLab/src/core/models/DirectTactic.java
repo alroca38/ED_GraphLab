@@ -8,6 +8,7 @@ public class DirectTactic extends Tactic {
         super();
     }
 
+    @Override
     public void lookForPlayer() {
         ArrayList<Site> players = SoccerField.getInstance().getSites();
         for (Site player : players) {
