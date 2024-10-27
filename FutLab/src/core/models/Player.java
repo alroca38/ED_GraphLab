@@ -1,8 +1,6 @@
 package core.models;
 
-
-
-public class Player extends Site{
+public class Player extends Site {
 
     private int pace, posession, shooting;
     private String name;
@@ -46,5 +44,5 @@ public class Player extends Site{
     public void setShooting(int shooting) {
         this.shooting = shooting;
     }
-    
+
 }
