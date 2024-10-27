@@ -1,7 +1,14 @@
 package core.models;
 
-public interface Tactic {
-    abstract void minPath(){
-        
+public abstract class Tactic {
+    protected Player interestingPlayer;
+    public Tactic(){
+        interestingPlayer = null;
+        lookForPlayer();
     }
+    
+    public Player getInterestingPlayer(){
+        return this.interestingPlayer;
+    }
+    abstract void lookForPlayer();
 }
