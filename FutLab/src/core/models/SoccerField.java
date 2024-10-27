@@ -91,7 +91,6 @@ public class SoccerField {
             sites.add(player);
             grafo.put(player, new ArrayList<>());
             if (sites.get(i) instanceof Player p) {
-                
                 System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
             }
             i++;
@@ -99,12 +98,12 @@ public class SoccerField {
     }
 
     public void expandGraph() {
-        // Ejemplo de expansión del grafo: Añadir posiciones intermedias
+        // Ejemplo de expansiÃ³n del grafo: AÃ±adir posiciones intermedias
         List<Player> interNodes = new ArrayList<>();
 
         // Crear nodos intermedios
         for (int i = 1; i <= 22; i++) {
-            Player position = new Player("Posicion" + i, 0, 0, 0);  // Nodos de posición sin atributos
+            Player position = new Player("Posicion" + i, 0, 0, 0);  // Nodos de posiciÃ³n sin atributos
             interNodes.add(position);
             grafo.put(position, new ArrayList<>());
         }
