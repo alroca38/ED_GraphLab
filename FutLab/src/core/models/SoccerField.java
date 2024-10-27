@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.JFrame;
 
 public class SoccerField {
 
@@ -60,50 +61,49 @@ public class SoccerField {
         this.adjacencyMatrix = adjacency;
     }
 
-    public void CreatePlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
+    public void createMatrix(File matriz, int[][] mat) throws FileNotFoundException, IOException {
+        JFrame frame = new JFrame();
+        BufferedReader br = new BufferedReader(new FileReader(matriz));
+        String line = null;
+        while ((line = br.readLine()) != null) {
+            String[] player = line.split(";");
+            for (int i = 0; i < player.length - 1; i++) {
+                for (int j = 1; j < player.length; j++) {
+                    int index = Integer.parseInt(player[j]);
+                    mat[i][j] = index;
+                }
+            }
+        }
+        br.close();
+        setAdjacency(mat);
+        CampoPanel cam = new CampoPanel(mat);
+        frame.add(cam);
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public void createPlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
         int i = 0;
-        ArrayList<Player> plyrs = new ArrayList<>();
+        sites = new ArrayList<>();
         for (String n : names) {
             Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
-            plyrs.add(player);
+            sites.add(player);
             grafo.put(player, new ArrayList<>());
-            //System.out.println(plyrs.get(i).getName() + ", " + plyrs.get(i).getPace() + ", " + plyrs.get(i).getPosession() + ", " + plyrs.get(i).getShooting());
+            if (sites.get(i) instanceof Player p) {
+                System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
+            }
             i++;
         }
     }
 
-    /*public void createPlayers(File players) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(players));
-        String line;
-        List<Player> plyrs = new ArrayList<>();
-        while ((line = br.readLine()) != null) {
-            String[] playerStats = line.split(",");
-            Player player = new Player(playerStats[0], Integer.parseInt(playerStats[1]), Integer.parseInt(playerStats[2]), Integer.parseInt(playerStats[3]));
-            plyrs.add(player);
-            grafo.put(player, new ArrayList<>());
-        }
-        br.close();
-        br = new BufferedReader(new FileReader(players));
-
-        int row = 0;
-        while ((line = br.readLine()) != null) {
-            String[] datas = line.split(",");
-            for (int col = 4; col < datas.length; col++) {
-                if (Integer.parseInt(datas[col]) == 1) {
-                    grafo.get(plyrs.get(row)).add(plyrs.get(col - 4));
-                }
-            }
-            row++;
-        }
-        br.close();
-    }*/
     public void expandGraph() {
-        // Ejemplo de expansión del grafo: Añadir posiciones intermedias
+        // Ejemplo de expansiÃ³n del grafo: AÃ±adir posiciones intermedias
         List<Player> interNodes = new ArrayList<>();
 
         // Crear nodos intermedios
         for (int i = 1; i <= 22; i++) {
-            Player position = new Player("Posicion" + i, 0, 0, 0);  // Nodos de posición sin atributos
+            Player position = new Player("Posicion" + i, 0, 0, 0);  // Nodos de posiciÃ³n sin atributos
             interNodes.add(position);
             grafo.put(position, new ArrayList<>());
         }

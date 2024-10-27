@@ -14,9 +14,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class PlayersFileController {
 
-    // MÈtodo para validar que la estructura del archivo sea correcta y procesable por el programa
+    // M√©todo para validar que la estructura del archivo sea correcta y procesable por el programa
     public static Response readPlayersFile(File playersFile, JTable playersTable, DefaultTableModel model) {
-        // VerificaciÛn de la extensiÛn del archivo
+        // Verificaci√≥n de la extensi√≥n del archivo
         if (!playersFile.getAbsolutePath().endsWith(".csv")) {
             return new Response("El archivo ingresado debe ser un archivo en formato CSV", Status.BAD_REQUEST);
         }
@@ -26,7 +26,7 @@ public class PlayersFileController {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(playersFile));
                 String line = null;
-                // Contador de las lÌneas del archivo
+                // Contador de las l√≠neas del archivo
                 int lineCount = 0;
                 // Listas para contener los atributos de los jugadores
                 ArrayList<String> playersNames = new ArrayList<>();
@@ -37,29 +37,29 @@ public class PlayersFileController {
                 String[] positions = {"POR", "LI", "DFCI", "DFCD", "LD", "MCD", "MC", "MC", "EI", "ED", "DC"};
                 // Bucle que recorre cada una de las lineas del archivo
                 while ((line = reader.readLine()) != null) {
-                    // Se suma una lÌnea al contador
+                    // Se suma una l√≠nea al contador
                     lineCount++;
-                    // Arreglo contenedor de cada uno de los campos de la lÌnea actual
+                    // Arreglo contenedor de cada uno de los campos de la l√≠nea actual
                     String[] playerStats = line.split(",");
-                    // ValidaciÛn de la cantidad de campos (Deben ser 4 por lÌnea)
+                    // Validaci√≥n de la cantidad de campos (Deben ser 4 por l√≠nea)
                     if (playerStats.length != 4) {
                         return new Response("El archivo ingresado no tiene la estructura correcta", Status.BAD_REQUEST);
                     }
                     // Arreglo contenedor de los caracteres que componen el nombre del jugador
                     char[] nameChar = playerStats[0].toCharArray();
-                    // ValidaciÛn del nombre del jugador
+                    // Validaci√≥n del nombre del jugador
                     if (playerStats[0].isEmpty() || nameChar[0] == ' ' || nameChar[nameChar.length - 1] == ' ') {
-                        return new Response("El nombre del jugador debe tener al menos 1 caracter. Adem·s, no puede inciar o terminar con un espacio", Status.BAD_REQUEST);
+                        return new Response("El nombre del jugador debe tener al menos 1 caracter. Adem√°s, no puede inciar o terminar con un espacio", Status.BAD_REQUEST);
                     }
-                    // Recorrido de los campos numÈricos del jugador actual
+                    // Recorrido de los campos num√©ricos del jugador actual
                     for (int i = 1; i < playerStats.length; i++) {
-                        // No puede haber campos vacÌos
+                        // No puede haber campos vac√≠os
                         if (playerStats[i].isEmpty()) {
                             return new Response("El archivo ingresado no tiene la estructura correcta", Status.BAD_REQUEST);
                         }
                         // No puede haber un atributo en 0
                         if ("0".equals(playerStats[i])) {
-                            return new Response("Ning˙n jugador puede tener 0 puntos en alguno de sus atributos", Status.BAD_REQUEST);
+                            return new Response("Ning√∫n jugador puede tener 0 puntos en alguno de sus atributos", Status.BAD_REQUEST);
                         }
                         // No puede haber campos en blanco
                         char[] stats = playerStats[i].toCharArray();
@@ -68,21 +68,21 @@ public class PlayersFileController {
                                 return new Response("El archivo ingresado no tiene la estructura correcta", Status.BAD_REQUEST);
                             }
                         }
-                        // Los atributos del jugador deben ser numÈricos
+                        // Los atributos del jugador deben ser num√©ricos
                         try {
                             Integer.valueOf(playerStats[i]);
                         } catch (NumberFormatException numericException) {
-                            return new Response("Los atributos de los jugadores deben ser numÈricos", Status.BAD_REQUEST);
+                            return new Response("Los atributos de los jugadores deben ser num√©ricos", Status.BAD_REQUEST);
                         }
                     }
-                    // Se aÒaden los atributos del jugador a las listas correspondientes
+                    // Se a√±aden los atributos del jugador a las listas correspondientes
                     playersNames.add(playerStats[0]);
                     playersPace.add(Integer.valueOf(playerStats[1]));
                     playersPosession.add(Integer.valueOf(playerStats[2]));
                     playersShooting.add(Integer.valueOf(playerStats[3]));
                 }
                 reader.close();
-                // El archivo solo puede contener 11 lÌneas
+                // El archivo solo puede contener 11 l√≠neas
                 if (lineCount > 11) {
                     return new Response("Solo pueden ser ingresados 11 jugadores", Status.BAD_REQUEST);
                 }
@@ -95,12 +95,12 @@ public class PlayersFileController {
                 }
                 TableProtector protector = new TableProtector(playersTable, model);
                 SoccerField.getInstance().CreatePlayers(playersNames, playersPace, playersPosession, playersShooting);
-                return new Response("Se ha leÌdo el archivo correctamente", Status.OK);
+                return new Response("Se ha le√≠do el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("Este archivo no puede ser procesado por el programa", Status.UNPROCESSABLE_CONTENT);
             }
         } catch (Exception unexpectedException) {
-            return new Response("OcurriÛ un error inesperado", Status.INTERNAL_SERVER_ERROR);
+            return new Response("Ocurri√≥ un error inesperado", Status.INTERNAL_SERVER_ERROR);
         }
     }
 }
