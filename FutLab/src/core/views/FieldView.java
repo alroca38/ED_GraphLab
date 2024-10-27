@@ -1,11 +1,13 @@
 package core.views;
 
+import core.models.CampoPanel;
+import core.models.SoccerField;
 import javax.swing.JFrame;
 
 public class FieldView extends javax.swing.JFrame {
 
     public FieldView() {
-        BackgroundPanel background = new BackgroundPanel("/resources/images/SoccerField.jpg");
+        CampoPanel background = new CampoPanel(SoccerField.getInstance().getAdjacency(), "/resources/images/SoccerField.jpg");
         setContentPane(background);
         setResizable(false);
         setLocationRelativeTo(null);

@@ -94,7 +94,7 @@ public class PlayersFileController {
                     model.addRow(player);
                 }
                 TableProtector protector = new TableProtector(playersTable, model);
-                SoccerField.getInstance().CreatePlayers(playersNames, playersPace, playersPosession, playersShooting);
+                SoccerField.getInstance().createPlayers(playersNames, playersPace, playersPosession, playersShooting);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("Este archivo no puede ser procesado por el programa", Status.UNPROCESSABLE_CONTENT);

@@ -73,7 +73,7 @@ public class SoccerField {
         String line = null;
         int i = 0; // �ndice de fila
         while ((line = br.readLine()) != null) {
-            String[] player = line.split(";");
+            String[] player = line.split(",");
             for (int j = 0; j < player.length; j++) { // recorre cada elemento en la fila
                 int index = Integer.parseInt(player[j]);
                 mat[i][j] = index; // asigna a la matriz en la posici�n [i][j]
@@ -82,11 +82,6 @@ public class SoccerField {
         }
         br.close();
         setAdjacency(mat);
-        CampoPanel cam = new CampoPanel(adjacencyMatrix);
-        frame.add(cam);
-        frame.setSize(800, 490);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
     }
 
     public void Adjacents() {
@@ -107,10 +102,6 @@ public class SoccerField {
             Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
             sites.add(player);
             grafo.put(player, new ArrayList<>());
-
-            if (sites.get(i) instanceof Player p) {
-                System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
-            }
             i++;
         }
 

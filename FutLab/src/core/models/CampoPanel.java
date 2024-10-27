@@ -2,9 +2,11 @@ package core.models;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -18,11 +20,13 @@ public class CampoPanel extends JPanel {
     private List<Integer> targetX;  // Lista de puntos finales en X para cada vértice
     private Timer timer;
     private List<Point> points;
+    Image image;
 
-    public CampoPanel(int[][] adjMatrix) {
+    public CampoPanel(int[][] adjMatrix, String path) {
         this.adjMatrix = adjMatrix;
         this.points = new ArrayList<>();
         targetX = new ArrayList<>();
+        image = new ImageIcon(getClass().getResource(path)).getImage();
 
         // Definición de las posiciones para una formación 4-3-3
         points.add(new Point(0, 220)); // Portero
@@ -126,9 +130,14 @@ public class CampoPanel extends JPanel {
     public void paintComponent(Graphics g) {
         // Dibuja los nodos de los jugadores
         super.paintComponent(g);
+        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         for (int i = 0; i < points.size(); i++) {
+            if(i==0){
+                g.setColor(Color.CYAN);
+            }else{
+            g.setColor(Color.RED);
+            }
             Point p = points.get(i);
-            g.setColor(Color.BLACK);
             g.fillOval(p.x - 7, p.y - 7, 15, 15);
 
             if (SoccerField.getInstance().getSites().get(i) instanceof Player player) {

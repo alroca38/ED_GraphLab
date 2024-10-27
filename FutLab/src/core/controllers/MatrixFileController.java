@@ -60,7 +60,7 @@ public class MatrixFileController {
                     return new Response("Deben ser ingresados al menos 11 jugadores", Status.BAD_REQUEST);
                 }
                 int[][] auxMatrix = new int[11][11];
-                //SoccerField.getInstance().createMatrix(matrixFile, auxMatrix);
+                SoccerField.getInstance().createMatrix(matrixFile, auxMatrix);
                 return new Response("Se ha leído el archivo correctamente", Status.OK);
             } catch (IOException fileException) {
                 return new Response("El archivo no pudo ser accedido/encontrado por el programa", Status.BAD_REQUEST);
