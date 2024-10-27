@@ -40,12 +40,6 @@ public class CampoPanel extends JPanel {
         points.add(new Point(150, 320)); // Delantero 3
         points.add(new Point(150, 120)); // Delantero 1
         points.add(new Point(150, 220)); // Delantero 2
-        
-        
-        
-        
-        
-        
 
         for (Point point : points) {
             targetX.add(point.x + 700);  // Ejemplo: moverse 100 unidades hacia la derecha
@@ -82,38 +76,38 @@ public class CampoPanel extends JPanel {
                 p.x -= 2;
                 allReachedTarget = false;
             }
-            if(a.x>100){
-                a.x=100;
+            if (a.x > 100) {
+                a.x = 100;
             }
-            if(d1.x>250){
-                d1.x=250;
+            if (d1.x > 250) {
+                d1.x = 250;
             }
-            if(d2.x>200){
-                d2.x=200;
+            if (d2.x > 200) {
+                d2.x = 200;
             }
-            if(d3.x>200){
-                d3.x=200;
+            if (d3.x > 200) {
+                d3.x = 200;
             }
-            if(d4.x>250){
-                d4.x=250;
+            if (d4.x > 250) {
+                d4.x = 250;
             }
-            if(m1.x>400){
-                m1.x=400;
+            if (m1.x > 400) {
+                m1.x = 400;
             }
-            if(m2.x>500){
-                m2.x=500;
+            if (m2.x > 500) {
+                m2.x = 500;
             }
-            if(m3.x>400){
-                m3.x=400;
+            if (m3.x > 400) {
+                m3.x = 400;
             }
-            if(de1.x>700){
-                de1.x=700;
+            if (de1.x > 700) {
+                de1.x = 700;
             }
-            if(de2.x>700){
-                de2.x=700;
+            if (de2.x > 700) {
+                de2.x = 700;
             }
-            if(de3.x>600){
-                de3.x=600;
+            if (de3.x > 600) {
+                de3.x = 600;
             }
         }
 
@@ -132,15 +126,16 @@ public class CampoPanel extends JPanel {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         for (int i = 0; i < points.size(); i++) {
-            if(i==0){
-                g.setColor(Color.CYAN);
-            }else{
-            g.setColor(Color.RED);
+            if (i == 0) {
+                g.setColor(Color.BLUE);
+            } else {
+                g.setColor(Color.RED);
             }
             Point p = points.get(i);
             g.fillOval(p.x - 7, p.y - 7, 15, 15);
 
             if (SoccerField.getInstance().getSites().get(i) instanceof Player player) {
+                g.setColor(Color.WHITE);
                 g.drawString(player.getName(), p.x - 15, p.y - 15);
             }
         }
@@ -150,6 +145,7 @@ public class CampoPanel extends JPanel {
                 if (adjMatrix[i][j] > 0) {
                     Point p1 = points.get(i);
                     Point p2 = points.get(j);
+                    g.setColor(Color.BLACK);
                     g.drawLine(p1.x, p1.y, p2.x, p2.y);
                 }
             }
