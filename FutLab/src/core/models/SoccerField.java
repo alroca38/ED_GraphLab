@@ -83,6 +83,17 @@ public class SoccerField {
         frame.setVisible(true);
     }
 
+    public void Adjacents() {
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            for (int j = 0; j < adjacencyMatrix.length; j++) {
+                if (adjacencyMatrix[i][j] > 0) {
+                    sites.get(i).addAdjacent(sites.get(j));
+                    sites.get(j).addAdjacent(sites.get(i));
+                }
+            }
+        }
+    }
+
     public void createPlayers(ArrayList<String> names, ArrayList<Integer> paces, ArrayList<Integer> posessions, ArrayList<Integer> shootings) {
         int i = 0;
         sites = new ArrayList<>();
@@ -90,12 +101,14 @@ public class SoccerField {
             Player player = new Player(n, paces.get(i), posessions.get(i), shootings.get(i));
             sites.add(player);
             grafo.put(player, new ArrayList<>());
+
             if (sites.get(i) instanceof Player p) {
 
                 System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
             }
             i++;
         }
+
     }
 
     public void expandGraph() {
