@@ -34,6 +34,15 @@ public class MatrixFileController {
                     if (playerAdjacency.length != 11) {
                         return new Response("El archivo ingresado no tiene la cantidad de campos requerida", Status.BAD_REQUEST);
                     }
+                    boolean isolated = true;
+                    for (String string : playerAdjacency) {
+                        if (!"0".equals(string)){
+                            isolated = false;
+                        }
+                    }
+                    if(isolated){
+                        return new Response("No pueden haber jugadores aislados del resto del equipo", Status.BAD_REQUEST);
+                    }
                     // Recorrido de los campos numéricos del jugador actual
                     for (int i = 0; i < playerAdjacency.length; i++) {
                         // Los campos únicamente pueden tomar el valor de 0 y 1

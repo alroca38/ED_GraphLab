@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Site {
 
-    private static int cv = 1;
+    private static int cv = 0;
     protected int id;
     protected ArrayList<Site> adjacent;
 

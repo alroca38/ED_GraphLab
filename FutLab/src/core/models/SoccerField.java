@@ -6,16 +6,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import javax.swing.JFrame;
+
 
 public class SoccerField {
 
+    private static final int INF = Integer.MAX_VALUE;
     private static SoccerField instance;
     private ArrayList<Site> sites;
     private int[][] adjacencyMatrix;
+    private Tactic tactic;
     Map<Player, List<Player>> grafo = new HashMap<>();
 
     private SoccerField() {
@@ -128,4 +134,16 @@ public class SoccerField {
         }
     }
 
+    public Player nextPlayer(Player currentPlayer) {
+        Player nextPlayer = null;
+        ArrayList<Site> adjacents = currentPlayer.getAdjacent();
+        for (Site adjacent : adjacents) {
+            if (nextPlayer == null) {
+                nextPlayer = (Player) adjacent;
+            } else {
+                
+            }
+        }
+        return nextPlayer;
+    }
 }
