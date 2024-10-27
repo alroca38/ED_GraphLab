@@ -65,20 +65,20 @@ public class SoccerField {
         JFrame frame = new JFrame();
         BufferedReader br = new BufferedReader(new FileReader(matriz));
         String line = null;
+        int i = 0; // índice de fila
         while ((line = br.readLine()) != null) {
             String[] player = line.split(";");
-            for (int i = 0; i < player.length - 1; i++) {
-                for (int j = 1; j < player.length; j++) {
-                    int index = Integer.parseInt(player[j]);
-                    mat[i][j] = index;
-                }
+            for (int j = 0; j < player.length; j++) { // recorre cada elemento en la fila
+                int index = Integer.parseInt(player[j]);
+                mat[i][j] = index; // asigna a la matriz en la posición [i][j]
             }
+            i++; // pasa a la siguiente fila
         }
         br.close();
         setAdjacency(mat);
-        CampoPanel cam = new CampoPanel(mat);
+        CampoPanel cam = new CampoPanel(adjacencyMatrix);
         frame.add(cam);
-        frame.setSize(500, 500);
+        frame.setSize(800, 490);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -91,7 +91,7 @@ public class SoccerField {
             sites.add(player);
             grafo.put(player, new ArrayList<>());
             if (sites.get(i) instanceof Player p) {
-                
+
                 System.out.println(p.getName() + ", " + p.getPace() + ", " + p.getPosession() + ", " + p.getShooting());
             }
             i++;

@@ -14,7 +14,7 @@ public class Player extends Site{
         this.posession = posession;
         this.shooting = shooting;
     }
-
+    
     public String getName() {
         return name;
     }
