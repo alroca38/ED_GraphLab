@@ -169,9 +169,10 @@ public class CampoPanel extends JPanel {
         int currentDistance = FloydWarshall.relativeInfinity();
         ArrayList<Site> adjacents = currentPlayer.getAdjacent();
         for (Site adjacent : adjacents) {
-            if (FloydWarshall.floydWarshall(SoccerField.getInstance().getAdjacency(), adjacent, SoccerField.getInstance().getTactic().getInterestingPlayer()) <= currentDistance) {
+            int distance = FloydWarshall.floydWarshall(SoccerField.getInstance().getAdjacency(), adjacent, SoccerField.getInstance().getTactic().getInterestingPlayer());
+            if (distance <= currentDistance) {
                 nextPlayer = (Player) adjacent;
-                currentDistance = FloydWarshall.floydWarshall(SoccerField.getInstance().getAdjacency(), nextPlayer, SoccerField.getInstance().getTactic().getInterestingPlayer());
+                currentDistance = distance;
             }
         }
         this.pl = nextPlayer;
