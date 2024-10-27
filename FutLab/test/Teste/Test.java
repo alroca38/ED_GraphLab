@@ -22,11 +22,23 @@ public class Test {
         names.add("Torres");
         names.add("Rodriguez");
         names.add("Rodriguezzzz");
+        names.add("Martin");
+        names.add("Alejandro");
+        names.add("Torres");
+        names.add("Rodriguez");
+        names.add("Rodriguezzzz");
+        names.add("Rodriguezzzz");
 
         paces.add(10);
         paces.add(30);
         paces.add(40);
         paces.add(67);
+        paces.add(62);
+        paces.add(10);
+        paces.add(30);
+        paces.add(40);
+        paces.add(67);
+        paces.add(62);
         paces.add(62);
 
         posessions.add(35);
@@ -34,23 +46,37 @@ public class Test {
         posessions.add(56);
         posessions.add(23);
         posessions.add(25);
+        posessions.add(35);
+        posessions.add(53);
+        posessions.add(56);
+        posessions.add(23);
+        posessions.add(25);
+        posessions.add(25);
 
         shootings.add(34);
         shootings.add(45);
         shootings.add(37);
         shootings.add(76);
         shootings.add(769);
+        shootings.add(34);
+        shootings.add(45);
+        shootings.add(37);
+        shootings.add(76);
+        shootings.add(769);
+        shootings.add(769);
         
-        int [][] matriz1=new int[5][6];
+        int[][] matriz1 = new int[11][11];
 
         JFrame frame = new JFrame("Grafo Dibujado");
         File matriz = new File("C:\\Users\\DELL\\Documents\\GitHub\\ED_GraphLab\\FutLab\\src\\main\\players.csv");
         campo.createPlayers(names, paces, posessions, shootings);
         campo.createMatrix(matriz, matriz1);
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 6; j++) {
-                System.out.println(campo.getAdjacency()[i][j]);
+        for (int i = 0; i < 11; i++) {
+            System.out.print("Jugador " + (i + 1) + "  ");
+            for (int j = 0; j < 11; j++) {
+                System.out.print(campo.getAdjacency()[i][j] + ", ");
             }
+            System.out.println();
         }
     }
 }
