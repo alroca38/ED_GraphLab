@@ -79,17 +79,17 @@ public class CampoPanel extends JPanel {
             if (a.x > 100) {
                 a.x = 100;
             }
-            if (d1.x > 250) {
-                d1.x = 250;
+            if (d1.x > 300) {
+                d1.x = 300;
             }
-            if (d2.x > 200) {
-                d2.x = 200;
+            if (d2.x > 250) {
+                d2.x = 250;
             }
-            if (d3.x > 200) {
-                d3.x = 200;
+            if (d3.x > 250) {
+                d3.x = 250;
             }
-            if (d4.x > 250) {
-                d4.x = 250;
+            if (d4.x > 300) {
+                d4.x = 300;
             }
             if (m1.x > 400) {
                 m1.x = 400;
