@@ -29,17 +29,17 @@ public class CampoPanel extends JPanel {
         image = new ImageIcon(getClass().getResource(path)).getImage();
 
         // Definición de las posiciones para una formación 4-3-3
-        points.add(new Point(0, 220)); // Portero
-        points.add(new Point(50, 295)); // Defensa 4
-        points.add(new Point(50, 245)); // Defensa 3
-        points.add(new Point(50, 195)); // Defensa 2
-        points.add(new Point(50, 145)); // Defensa 1
-        points.add(new Point(100, 270)); // Medio 3
-        points.add(new Point(100, 220)); // Medio 2
-        points.add(new Point(100, 170)); // Medio 1
-        points.add(new Point(150, 320)); // Delantero 3
-        points.add(new Point(150, 120)); // Delantero 1
-        points.add(new Point(150, 220)); // Delantero 2
+        points.add(new Point(0, 250)); // Portero
+        points.add(new Point(50, 100)); // Defensa 4
+        points.add(new Point(50, 200)); // Defensa 3
+        points.add(new Point(50, 300)); // Defensa 2
+        points.add(new Point(50, 400)); // Defensa 1
+        points.add(new Point(100, 350)); // Medio 3
+        points.add(new Point(100, 250)); // Medio 2
+        points.add(new Point(100, 150)); // Medio 1
+        points.add(new Point(150, 400)); // Delantero 3
+        points.add(new Point(150, 100)); // Delantero 1
+        points.add(new Point(150, 250)); // Delantero 2
 
         for (Point point : points) {
             targetX.add(point.x + 700);  // Ejemplo: moverse 100 unidades hacia la derecha
@@ -70,10 +70,10 @@ public class CampoPanel extends JPanel {
 
             // Mover el punto hacia el objetivo en el eje X
             if (p.x < tx) {
-                p.x += 2;  // Ajusta la velocidad aumentando el incremento
+                p.x += 1;  // Ajusta la velocidad aumentando el incremento
                 allReachedTarget = false;
             } else if (p.x > tx) {
-                p.x -= 2;
+                p.x -= 1;
                 allReachedTarget = false;
             }
             if (a.x > 100) {
